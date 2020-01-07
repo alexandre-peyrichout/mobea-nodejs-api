@@ -24,6 +24,6 @@ const router = express.Router();
 // router.use('./situation', situation);
 // router.use('./taskHasDestination', taskHasDestination);
 
-router.use('./user', user);
+router.use('/user', user);
 
 module.exports = router;

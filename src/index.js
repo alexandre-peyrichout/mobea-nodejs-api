@@ -1,10 +1,12 @@
 const express = require('express');
+const api = require('./routes');
 
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 // const connection = require('./config');
-const api = require('./routes');
+
+
 
 
 // Support JSON-encoded bodies
@@ -603,9 +605,9 @@ app.use('/api', api);
 //   });
 // });
 
-app.listen(port, (err) => {
+app.listen(port, err => {
   if (err) {
-    throw new Error('There is an error');
+    throw new Error('Something bad happened...');
   }
-  console.log('listening');
+  console.log(`Server is listening on ${port}`);
 });
