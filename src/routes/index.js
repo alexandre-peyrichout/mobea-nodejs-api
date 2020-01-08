@@ -1,4 +1,6 @@
 const express = require('express');
+const user = require('../config');
+
 
 const reason = require('./reason');
 const taskType = require('./taskType');
@@ -13,15 +15,15 @@ const taskHasDestination = require('./taskHasDestination');
 
 const router = express.Router();
 
-router.use('./reason', reason);
-router.use('./taskType', taskType);
-router.use('./city', city);
-router.use('./admin', admin);
-router.use('./country', country);
-router.use('./task', task);
-router.use('./user', user);
-router.use('./destination', destination);
-router.use('./situation', situation);
-router.use('./taskHasDestination', taskHasDestination);
+router.use('/reason', reason);
+router.use('/taskType', taskType);
+router.use('/city', city);
+router.use('/admin', admin);
+router.use('/country', country);
+router.use('/task', task);
+router.use('/user', user);
+router.use('/destination', destination);
+router.use('/situation', situation);
+router.use('/taskHasDestination', taskHasDestination);
 
 module.exports = router;
