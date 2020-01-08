@@ -42,7 +42,7 @@ router.put("/:id", (req, res) => {
   const idUrl = req.params.id;
   const formData = req.body;
 
-  connection.query("UPDATE user SET ? WHERE iduser = ?", [ formData, idUrl ], (err) => {
+  connection.query("UPDATE user SET ? WHERE iduser = ?", [formData, idUrl], (err) => {
     if (err) {
       res.status(500).send("Error to modify a User");
     } else {
@@ -54,7 +54,7 @@ router.put("/:id", (req, res) => {
 // Delete ONE user
 router.delete("/:id", (req, res) => {
   const idUrl = req.params.id;
-  connection.query("DELETE FROM user WHERE iduser = ?", [ idUrl ], (err) => {
+  connection.query("DELETE FROM user WHERE iduser = ?", [idUrl], (err) => {
     if (err) {
       res.status(500).send("Error deleting");
     } else {
