@@ -9,7 +9,7 @@ const task = require("./task");
 const user = require("./user");
 const destination = require("./destination");
 const situation = require("./situation");
-// const taskHasDestination = require('./taskHasDestination');
+const taskHasDestination = require("./taskHasDestination");
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.use("/task", task);
 
 router.use("/destination", destination);
 router.use("/situation", situation);
-// router.use('./taskHasDestination', taskHasDestination);
+router.use("/taskHasDestination", taskHasDestination);
 
 router.use("/user", user);
 router.use("/country", country);

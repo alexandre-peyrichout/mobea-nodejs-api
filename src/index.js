@@ -22,61 +22,6 @@ app.use((req, res, next) => {
 app.use("/api", api);
 
 
-// // ----- TABLE: TASK
-
-// // Route to select ALL tasks
-// app.get('/api/tasks', (req, res) => {
-//   connection.query('SELECT * from task', (err) => {
-//     if (err) {
-//       res.status(500).send('Error retrieving task');
-//     } else {
-//       res.sendStatus(200);
-//     }
-//   });
-// });
-
-// // Route to post ONE task
-// app.post('/api/tasks', (req, res) => {
-//   const formData = req.body;
-//   connection.query('INSERT INTO task SET ?', formData, (err) => {
-//     if (err) {
-//       res.status(500).send('Error saving');
-//     } else {
-//       res.sendStatus(200);
-//     }
-//   });
-// });
-
-// // Route to modify ONE task
-// app.put('/api/task/:id', (req, res) => {
-//   const idUrl = req.params.id;
-//   const formData = req.body;
-
-//   connection.query(
-//     'UPDATE task SET ? WHERE idtask = ?',
-//     [formData, idUrl],
-//     (err) => {
-//       if (err) {
-//         res.status(500).send('Error editing');
-//       } else {
-//         res.sendStatus(200);
-//       }
-//     },
-//   );
-// });
-
-// // Route to Delete ONE task
-// app.delete('/api/task/:id', (req, res) => {
-//   const idUrl = req.params.id;
-//   connection.query('DELETE FROM task WHERE idtask = ?', [idUrl], (err) => {
-//     if (err) {
-//       res.status(500).send('Error deleting');
-//     } else {
-//       res.sendStatus(200);
-//     }
-//   });
-// });
-
 // // ----- TABLE: TASK_TYPE
 
 // // Route to select ALL tasks_type
