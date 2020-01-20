@@ -120,7 +120,7 @@ router.delete("/:id", (req, res) => {
   const idUrl = req.params.id;
   connection.query("DELETE FROM user WHERE iduser = ?", [idUrl], err => {
     if (err) {
-      res.status(500).send("Error deleting");
+      res.status(500).send(err);
     } else {
       res.sendStatus(200);
     }

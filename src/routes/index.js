@@ -10,6 +10,7 @@ const user = require("./user");
 const destination = require("./destination");
 const situation = require("./situation");
 const taskHasDestination = require("./taskHasDestination");
+const provider = require("./provider");
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.use("/reason", reason);
 router.use("/taskType", taskType);
 router.use("/city", city);
 router.use("/admin", admin);
-// router.use('./country', country);
+router.use("/provider", provider);
 router.use("/task", task);
 
 router.use("/destination", destination);
