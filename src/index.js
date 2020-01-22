@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 
 const api = require("./routes");
 
+const PORT = process.env.DATA_PORT || 3000;
+
 const app = express();
 
 // Support JSON-encoded bodies
@@ -194,7 +196,7 @@ app.use("/api", api);
 //   });
 // });
 
-app.listen(5000, (err) => {
+app.listen(PORT, (err) => {
   if (err) {
     throw new Error("Something bad happened...");
   }
