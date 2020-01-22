@@ -9,7 +9,7 @@ const router = express.Router({ mergeParams: true });
 router.get("/", (req, res) => {
   connection.query("SELECT * from user", (err, results) => {
     if (err) {
-      res.status(500).send("Error retrieving all users");
+      res.status(500).send(err);
     } else {
       res.json(results);
     }
