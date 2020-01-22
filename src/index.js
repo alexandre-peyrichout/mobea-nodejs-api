@@ -252,7 +252,7 @@ app.use("/api", api);
 //   });
 // });
 
-app.listen(port, (err) => {
+app.listen(port,"0.0.0.0", (err) => {
   if (err) {
     throw new Error("Something bad happened...");
   }
