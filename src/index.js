@@ -198,5 +198,5 @@ app.listen(5000, (err) => {
   if (err) {
     throw new Error("Something bad happened...");
   }
-  console.log(`Server is listening on ${port}`);
+  console.log(`Server is listening on 5000`);
 });
