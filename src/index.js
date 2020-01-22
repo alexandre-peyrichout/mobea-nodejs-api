@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const api = require("./routes");
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
