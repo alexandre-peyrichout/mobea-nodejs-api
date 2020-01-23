@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.use("/api", api);
 
 const port = process.env.DATA_PORT || 5000;
-const host = 'localhost' || '0.0.0.0';
+const host = '0.0.0.0';
 
 app.listen(port, host, (err) => {
   if (err) {
