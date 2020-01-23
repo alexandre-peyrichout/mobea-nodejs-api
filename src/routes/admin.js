@@ -1,9 +1,9 @@
-const express = require("express");
-const connection = require("../config");
+const express = require('express');
+const connection = require('../config');
 const router = express.Router({ mergeParams: true });
 
 // ALL admin
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
   connection.query('SELECT * from admin', (err, results) => {
     if (err) {
       res.status(500).send('Error retrieving all admin');
@@ -16,7 +16,7 @@ router.get('/', (req,res) => {
 // Create a new admin
 router.post('/new', (req, res) => {
   const formData = req.body;
-  connection.query('INSERT INTO admin SET ?', formData, (err) => {
+  connection.query('INSERT INTO admin SET ?', formData, err => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -33,20 +33,20 @@ router.put('/:id', (req, res) => {
   connection.query(
     'UPDATE admin SET ? WHERE idadmin = ?',
     [formData, idUrl],
-    (err) => {
+    err => {
       if (err) {
         res.status(500).send('Error modify admin');
       } else {
         res.sendStatus(200);
       }
-    },
+    }
   );
 });
 
 // delete a admin
 router.delete('/:id', (req, res) => {
   const idUrl = req.params.id;
-  connection.query('DELETE FROM admin WHERE idadmin = ?', [idUrl], (err) => {
+  connection.query('DELETE FROM admin WHERE idadmin = ?', [idUrl], err => {
     if (err) {
       res.status(500).send('Error deleting');
     } else {

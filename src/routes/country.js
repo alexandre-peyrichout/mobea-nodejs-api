@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 // Create a new country
 router.post("/new", (req, res) => {
   const formData = req.body;
-  connection.query("INSERT INTO country SET ?", formData, (err) => {
+  connection.query("INSERT INTO country SET ?", formData, err => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -29,6 +29,7 @@ router.post("/new", (req, res) => {
 router.put("/:id", (req, res) => {
   const idUrl = req.params.id;
   const formData = req.body;
+  console.log(idUrl, formData);
 
   connection.query(
     "UPDATE country SET ? WHERE idcountry = ?",
@@ -39,16 +40,16 @@ router.put("/:id", (req, res) => {
       } else {
         res.sendStatus(200);
       }
-    },
+    }
   );
 });
 
 // Delete ONE country
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   const idUrl = req.params.id;
-  connection.query('DELETE FROM country WHERE idcountry = ?', [idUrl], (err) => {
+  connection.query("DELETE FROM country WHERE idcountry = ?", [idUrl], err => {
     if (err) {
-      res.status(500).send('Error deleting');
+      res.status(500).send("Error deleting");
     } else {
       res.sendStatus(200);
     }
