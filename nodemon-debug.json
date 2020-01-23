@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": "js",
   "ignore": [],
-  "exec": "node --inspect-brk ./src/index.js"
+  "exec": "node --inspect-brk ./index.js"
 }

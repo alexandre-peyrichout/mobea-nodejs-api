@@ -2,6 +2,7 @@ const express = require("express");
 
 const bodyParser = require("body-parser");
 
+const dotenv = require("dotenv");
 const api = require("./routes");
 
 const PORT = process.env.DATA_PORT || 5000;
