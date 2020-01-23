@@ -88,10 +88,12 @@ router.post("/signin", (req, res) => {
         if (!isSame) {
           res.status(403).send("wrong password");
         } else {
-          jwt.sign({
+          jwt.sign(
+            {
               result
             },
-            "chaussetterouge123", {
+            "chaussetterouge123",
+            {
               expiresIn: "3000s"
             },
             (err, token) => {
