@@ -12,6 +12,7 @@ const situation = require("./situation");
 const taskHasDestination = require("./taskHasDestination");
 const provider = require("./provider");
 const datas = require("./datas");
+const dashboard = require("./dashboard");
 
 const router = express.Router();
 
@@ -30,5 +31,7 @@ router.use("/taskHasDestination", taskHasDestination);
 
 router.use("/user", user);
 router.use("/country", country);
+
+router.use("/dashboard", dashboard);
 
 module.exports = router;

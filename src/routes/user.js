@@ -3,13 +3,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const connection = require("../config");
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router({
+  mergeParams: true
+});
 
 // Route to select ALL users
 router.get("/", (req, res) => {
   connection.query("SELECT * from user", (err, results) => {
     if (err) {
-      res.status(500).send("Error retrieving all users");
+      res.status(500).send(err);
     } else {
       res.json(results);
     }
@@ -68,9 +70,12 @@ router.get("/:id", (req, res) => {
 router.post("/new", (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 5);
   const formData = {
+    avatar: req.body.avatar,
     email: req.body.email,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    birthday: req.body.birthday,
+    address: req.body.address,
     city_idcity: req.body.city_idcity,
     country_idcountry: req.body.country_idcountry,
     situation_idsituation: req.body.situation_idsituation,
@@ -116,9 +121,13 @@ router.post("/signin", (req, res) => {
           res.status(403).send("wrong password");
         } else {
           jwt.sign(
-            { result },
+            {
+              result
+            },
             "chaussetterouge123",
-            { expiresIn: "3000s" },
+            {
+              expiresIn: "3000s"
+            },
             (err, token) => {
               res.json(token);
             }

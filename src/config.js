@@ -5,9 +5,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connection = mysql.createConnection({
-  host:"eu-cdbr-west-02.cleardb.net",
-  user: "bda365288edd60",
-  password: "5a65d830",
-  database: "heroku_413d8abfe34321f"
+  host: process.env.DATA_HOST,
+  user: process.env.DATA_USER,
+  password: process.env.DATA_PASS,
+  database: process.env.DATA_BASE
 });
+
 module.exports = connection;
