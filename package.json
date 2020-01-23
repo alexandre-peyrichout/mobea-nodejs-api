@@ -10,7 +10,10 @@
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["Node", "nodemon"],
+  "keywords": [
+    "Node",
+    "nodemon"
+  ],
   "author": "mrwhite",
   "license": "ISC",
   "devDependencies": {
