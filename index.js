@@ -2,7 +2,7 @@ const express = require("express");
 
 const bodyParser = require("body-parser");
 
-const api = require("./routes");
+const api = require("./src/routes");
 
 const app = express();
 const port = 3000;
@@ -20,7 +20,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", api);
-
 
 // // ----- TABLE: TASK
 
@@ -136,8 +135,6 @@ app.use("/api", api);
 //   );
 // });
 
-
-
 // // ----- TABLE: TASK_HAS_DESTINATION
 
 // // Route to select ALL tasks_has_destination
@@ -252,7 +249,7 @@ app.use("/api", api);
 //   });
 // });
 
-app.listen(port,"0.0.0.0", (err) => {
+app.listen(3000, (err) => {
   if (err) {
     throw new Error("Something bad happened...");
   }
