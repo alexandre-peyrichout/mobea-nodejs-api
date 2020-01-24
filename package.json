@@ -2,11 +2,11 @@
   "name": "node-template",
   "version": "0.0.1",
   "description": "Node template",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "scripts": {
     "start": "node src/index.js",
     "start:dev": "nodemon",
-    "start:debug": "nodemon --config nodemon-debug.json",
+    "start:debsug": "nodemon --config nodemon-debug.json",
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

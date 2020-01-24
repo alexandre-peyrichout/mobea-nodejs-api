@@ -1,5 +1,9 @@
 const express = require("express");
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const bodyParser = require("body-parser");
 
 const api = require("./routes");
