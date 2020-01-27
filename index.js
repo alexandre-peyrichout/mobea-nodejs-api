@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 
 const api = require("./src/routes");
 
-const port = process.env.DATA_PORT || 3000;
+const PORT = process.env.DATA_PORT || 3000;
 
 const app = express();
 
@@ -30,9 +30,9 @@ app.use((req, res, next) => {
 
 app.use("/api", api);
 
-app.listen(port, err => {
+app.listen(PORT, err => {
   if (err) {
     throw new Error("Something bad happened...");
   }
-  console.log(`Server is listening on ${port}`);
+  console.log(`Server is listening on ${PORT}`);
 });
