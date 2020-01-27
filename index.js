@@ -1,14 +1,11 @@
 const express = require("express");
 
-const dotenv = require("dotenv");
-
-dotenv.config();
-
 const bodyParser = require("body-parser");
 
+const dotenv = require("dotenv");
 const api = require("./routes");
 
-const port = process.env.DATA_PORT || 3000;
+const PORT = process.env.DATA_PORT || 5000;
 
 const app = express();
 
@@ -34,5 +31,5 @@ app.listen(port, err => {
   if (err) {
     throw new Error("Something bad happened...");
   }
-  console.log(`Server is listening on ${port}`);
+  console.log(`Server is listening on ${PORT}`);
 });
