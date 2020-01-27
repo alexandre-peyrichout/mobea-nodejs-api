@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 app.use("/api", api);
 
-app.listen(port, err => {
+app.listen(PORT, err => {
   if (err) {
     throw new Error("Something bad happened...");
   }
