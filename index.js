@@ -3,7 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const connection = require("./src/config");
-const api = require("./routes");
+const api = require("./src/routes");
 app.use("/api", api);
 
 // Support JSON-encoded bodies
