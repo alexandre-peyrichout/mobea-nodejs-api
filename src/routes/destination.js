@@ -14,6 +14,22 @@ router.get("/", (req, res) => {
   });
 });
 
+// ALL destinations fromm one user
+router.get("/last/:id", (req, res) => {
+  const user = req.body;
+  connection.query(
+    "SELECT * from destination WHERE user_iduser = ? ORDER BY DESC LIMIT 1",
+    user,
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error retrieving destination");
+      } else {
+        res.json(results);
+      }
+    }
+  );
+});
+
 // // Create a new destination
 router.post("/new", (req, res) => {
   const formData = req.body;
