@@ -3,26 +3,44 @@ const connection = require("../config");
 const router = express.Router({ mergeParams: true });
 
 // All cities
+// router.get("/", (req, res) => {
+//   connection.query("SELECT * from city", (err, results) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.json(results);
+//     }
+//   });
+// });
+
+// join foreignKey in panel admin
 router.get("/", (req, res) => {
-  connection.query("SELECT * from city", (err, results) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(results);
+  connection.query(
+    "SELECT c.*, cou.name AS country FROM city c JOIN country cou ON c.country_idcountry = cou.idcountry",
+    (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json(results);
+      }
     }
-  });
+  );
 });
 
 // Create a new city
 router.post("/new", (req, res) => {
   const formData = req.body;
-  connection.query("INSERT INTO city SET ?", formData, err => {
-    if (err) {
-      res.status(500).send("Error create new city");
-    } else {
-      res.sendStatus(200);
+  console.log("form", formData);
+  connection.query(
+    `INSERT INTO city (name, country_idcountry) VALUES ("${formData.name}", (SELECT idcountry FROM country WHERE "${formData.country}" = country.name))`,
+    err => {
+      if (err) {
+        res.status(500).send(err), console.log(err);
+      } else {
+        res.sendStatus(200);
+      }
     }
-  });
+  );
 });
 
 // Modify city

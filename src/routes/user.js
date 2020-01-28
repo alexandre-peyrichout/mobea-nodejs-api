@@ -18,6 +18,21 @@ router.get("/", (req, res) => {
   });
 });
 
+// Route to join foreignKey in user
+router.get("/test3", (req, res) => {
+  const { user } = req.query;
+  connection.query(
+    "SELECT u.*, c.name AS city, cou.name AS country, s.name AS situation FROM user u JOIN city c ON u.city_idcity = c.idcity JOIN country cou ON u.country_idcountry = cou.idcountry JOIN situation s ON u.situation_idsituation = s.idsituation",
+    (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+});
+
 // Select everything we need from one user
 router.get("/test", (req, res) => {
   const { user } = req.query;
