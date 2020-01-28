@@ -6,7 +6,7 @@ const router = express.Router({ mergeParams: true });
 router.get("/", (req, res) => {
   connection.query("SELECT * from city", (err, results) => {
     if (err) {
-      res.status(500).send("Error retrieve cities");
+      res.status(500).send(err);
     } else {
       res.json(results);
     }
