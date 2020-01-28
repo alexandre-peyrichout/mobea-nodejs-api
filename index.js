@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 app.use("/api", api);
 
-app.listen(PORT, err => {
+app.listen(port, err => {
   if (err) {
     throw new Error("Something bad happened...");
   }
