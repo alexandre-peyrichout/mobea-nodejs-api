@@ -44,18 +44,15 @@ router.post("/new", (req, res) => {
 });
 
 // Create all tasks when a news destination is created
-router.post("/generate", (req, res) => {
-  const destination = req.body;
+router.get("/generate/:id", (req, res) => {
+  const destination = req.params.id;
   connection.query(
-    "INSERT INTO task_has_destination (task_idtask, destination_iddestination, isdone) (SELECT idtask, ?, 0 FROM task)",
-    destination,
-    err => {
-      if (err) {
-        res
-          .status(500)
-          .send("Error generating all new tasks in task_has_destination");
+    `INSERT INTO task_has_destination (task_idtask, destination_iddestination, isdone) (SELECT idtask, ${destination}, 0 FROM task)`,
+    (error, results) => {
+      if (error) {
+        res.status(500).send(error);
       } else {
-        res.sendStatus(200);
+        res.json(results);
       }
     }
   );
