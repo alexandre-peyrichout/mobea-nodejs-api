@@ -43,6 +43,24 @@ router.post("/new", (req, res) => {
   });
 });
 
+// Create all tasks when a news destination is created
+router.post("/generate", (req, res) => {
+  const destination = req.body;
+  connection.query(
+    "INSERT INTO task_has_destination (task_idtask, destination_iddestination, isdone) (SELECT idtask, ?, 0 FROM task)",
+    destination,
+    err => {
+      if (err) {
+        res
+          .status(500)
+          .send("Error generating all new tasks in task_has_destination");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
 // Modify a task_has_destination
 router.put("/:id/:id2", (req, res) => {
   const idUrl = req.params.id;
