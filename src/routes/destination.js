@@ -15,16 +15,16 @@ router.get("/", (req, res) => {
 });
 
 // ALL destinations fromm one user
-router.get("/last/:id", (req, res) => {
-  const user = req.body;
+router.get("/last", (req, res) => {
+  const user = req.query.id;
   connection.query(
-    "SELECT * from destination WHERE user_iduser = ? ORDER BY DESC LIMIT 1",
+    "SELECT iddestination from destination WHERE user_iduser = ? ORDER BY iddestination DESC LIMIT 1",
     user,
-    (err, results) => {
+    (err, lastDest) => {
       if (err) {
         res.status(500).send("Error retrieving destination");
       } else {
-        res.json(results);
+        res.json(lastDest);
       }
     }
   );
