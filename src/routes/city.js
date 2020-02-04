@@ -1,5 +1,6 @@
 const express = require("express");
 const connection = require("../config");
+
 const router = express.Router({ mergeParams: true });
 
 // All cities
@@ -16,7 +17,7 @@ const router = express.Router({ mergeParams: true });
 // join foreignKey in panel admin
 router.get("/", (req, res) => {
   connection.query(
-    "SELECT c.*, cou.name AS country FROM city c JOIN country cou ON c.country_idcountry = cou.idcountry",
+    "SELECT city.*, country.name AS country from city JOIN country ON country.idcountry = city.country_idcountry",
     (err, results) => {
       if (err) {
         res.status(500).send(err);
@@ -30,12 +31,12 @@ router.get("/", (req, res) => {
 // Create a new city
 router.post("/new", (req, res) => {
   const formData = req.body;
-  console.log("form", formData);
   connection.query(
     `INSERT INTO city (name, country_idcountry) VALUES ("${formData.name}", (SELECT idcountry FROM country WHERE "${formData.country}" = country.name))`,
+    formData,
     err => {
       if (err) {
-        res.status(500).send(err), console.log(err);
+        res.status(500).send("Error create new city");
       } else {
         res.sendStatus(200);
       }
