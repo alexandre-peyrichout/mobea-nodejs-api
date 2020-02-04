@@ -1,16 +1,30 @@
 const express = require("express");
 const connection = require("../config");
+
 const router = express.Router({ mergeParams: true });
 
 // All task
+// router.get("/", (req, res) => {
+//   connection.query("SELECT * from task", (err, results) => {
+//     if (err) {
+//       res.status(500).send("Error retrieve situation");
+//     } else {
+//       res.json(results);
+//     }
+//   });
+// });
+
 router.get("/", (req, res) => {
-  connection.query("SELECT * from task", (err, results) => {
-    if (err) {
-      res.status(500).send("Error retrieve situation");
-    } else {
-      res.json(results);
+  connection.query(
+    "SELECT t.*, ty.name AS categorie FROM task t JOIN task_type ty ON t.task_type_idtask_type = ty.idtask_type",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error retrieve situation");
+      } else {
+        res.json(results);
+      }
     }
-  });
+  );
 });
 
 // Create a new situation
@@ -29,7 +43,7 @@ router.post("/new", (req, res) => {
 router.put("/:id", (req, res) => {
   const idUrl = req.params.id;
   const formData = req.body;
-
+  console.log(formData);
   connection.query(
     "UPDATE task SET ? WHERE idtask = ?",
     [formData, idUrl],

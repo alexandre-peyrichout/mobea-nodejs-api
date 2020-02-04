@@ -21,7 +21,7 @@ router.get("/userDestinations", (req, res) => {
 router.get("/userData", (req, res) => {
   const { user } = req.query;
   connection.query(
-    "SELECT user.*, situation.name AS situation FROM user JOIN situation ON user.situation_idsituation = situation.idsituation WHERE iduser = ?",
+    "SELECT user.* FROM user WHERE iduser = ?",
     user,
     (err, userData) => {
       if (err) {
@@ -51,7 +51,7 @@ router.get("/userChecklists", (req, res) => {
 router.get("/stats", (req, res) => {
   const { destination } = req.query;
   connection.query(
-    "SELECT count(task_has_destination.isdone) AS total, task_type.name AS type, task_type.idtask_type, (SELECT AVG(percent) AS progress FROM(SELECT  (SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) * 100) / SUM(CASE WHEN task_has_destination.isdone = 0 THEN 1 ELSE 0 END) AS percent FROM task_has_destination JOIN task ON task_has_destination.task_idtask = task.idtask JOIN task_type ON task.task_type_idtask_type = task_type.idtask_type JOIN destination ON task_has_destination.destination_iddestination = destination.iddestination WHERE destination_iddestination = ? GROUP BY task.task_type_idtask_type) MyTable) AS global, SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) AS done, SUM(CASE WHEN task_has_destination.isdone = 0 THEN 1 ELSE 0 END) AS result, (SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) * 100) / SUM(CASE WHEN task_has_destination.isdone = 0 THEN 1 ELSE 0 END) AS percent FROM task_has_destination JOIN task ON task_has_destination.task_idtask = task.idtask JOIN task_type ON task.task_type_idtask_type = task_type.idtask_type JOIN destination ON task_has_destination.destination_iddestination = destination.iddestination WHERE destination_iddestination = ? GROUP BY task.task_type_idtask_type",
+    "SELECT count(task_has_destination.isdone) AS total, task_type.name AS type, task_type.idtask_type, (SELECT AVG(percent) AS progress FROM(SELECT  (SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) * 100) / SUM(CASE WHEN task_has_destination.isdone = 0 OR 1 THEN 1 ELSE 0 END) AS percent FROM task_has_destination JOIN task ON task_has_destination.task_idtask = task.idtask JOIN task_type ON task.task_type_idtask_type = task_type.idtask_type JOIN destination ON task_has_destination.destination_iddestination = destination.iddestination WHERE destination_iddestination = ? GROUP BY task.task_type_idtask_type) MyTable) AS global, SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) AS done, SUM(CASE WHEN task_has_destination.isdone = 0 THEN 1 ELSE 0 END) AS result, (SUM(CASE WHEN task_has_destination.isdone = 1 THEN 1 ELSE 0 END) * 100) / SUM(CASE WHEN task_has_destination.isdone = 0 OR 1 THEN 1 ELSE 0 END) AS percent FROM task_has_destination JOIN task ON task_has_destination.task_idtask = task.idtask JOIN task_type ON task.task_type_idtask_type = task_type.idtask_type JOIN destination ON task_has_destination.destination_iddestination = destination.iddestination WHERE destination_iddestination = ? GROUP BY task.task_type_idtask_type",
     [destination, destination],
     (err, results) => {
       if (err) {
