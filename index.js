@@ -22,7 +22,7 @@ app.use("/api", api);
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 // Support URL-encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Dans index.js ajouter config CORS
 
