@@ -111,7 +111,7 @@ router.post("/signin", (req, res) => {
     [formData.email],
     (err, result) => {
       if (err) {
-        res.status(500).send("login error");
+        res.status(500).send(err);
       } else {
         formData = {
           email: req.body.email,
