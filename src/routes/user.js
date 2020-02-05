@@ -18,6 +18,21 @@ router.get("/", (req, res) => {
   });
 });
 
+// Route to join foreignKey in user
+router.get("/test3", (req, res) => {
+  const { user } = req.query;
+  connection.query(
+    "SELECT u.*, c.name AS city, cou.name AS country, s.name AS situation FROM user u JOIN city c ON u.city_idcity = c.idcity JOIN country cou ON u.country_idcountry = cou.idcountry JOIN situation s ON u.situation_idsituation = s.idsituation",
+    (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json(results);
+      }
+    }
+  );
+});
+
 // Select everything we need from one user
 router.get("/test", (req, res) => {
   const { user } = req.query;
@@ -72,7 +87,6 @@ router.post("/new", (req, res) => {
     password: hash
   };
 
-  console.log(formData);
   connection.query("INSERT INTO user SET ?", formData, (err) => {
     if (err) {
       res.status(500).send(err);
@@ -118,7 +132,9 @@ router.post("/signin", (req, res) => {
 // Modify a user
 router.put("/:id", (req, res) => {
   const idUrl = req.params.id;
-  const formData = req.body;
+  const formData = req.body.info;
+
+  console.log(formData);
 
   connection.query("UPDATE user SET ? WHERE iduser = ?", [formData, idUrl], (err) => {
     if (err) {

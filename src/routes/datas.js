@@ -21,7 +21,7 @@ router.get("/userDestinations", (req, res) => {
 router.get("/userData", (req, res) => {
   const { user } = req.query;
   connection.query(
-    "SELECT user.*, situation.name AS situation FROM user JOIN situation ON user.situation_idsituation = situation.idsituation WHERE iduser = ?",
+    "SELECT user.* FROM user WHERE iduser = ?",
     user,
     (err, userData) => {
       if (err) {
