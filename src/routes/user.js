@@ -106,6 +106,7 @@ router.post("/signin", (req, res) => {
   let formData = {
     email: req.body.email
   };
+  console.log(formData);
   connection.query(
     "SELECT * FROM user WHERE email = ?",
     [formData.email],
