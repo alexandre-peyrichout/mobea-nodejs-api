@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 router.get("/last", (req, res) => {
   const user = req.query.id;
   connection.query(
-    "SELECT iddestination from destination WHERE user_iduser = ? ORDER BY iddestination DESC LIMIT 1",
+    "SELECT destination from destination WHERE user_iduser = ? ORDER BY iddestination DESC LIMIT 1",
     user,
     (err, lastDest) => {
       if (err) {
@@ -47,33 +47,25 @@ router.put("/:id", (req, res) => {
   const idUrl = req.params.id;
   const formData = req.body;
 
-  connection.query(
-    "UPDATE destination SET ? WHERE iddestination = ?",
-    [formData, idUrl],
-    (err, results) => {
-      if (err) {
-        res.status(500).send("Error modify destination");
-      } else {
-        res.json(results);
-      }
+  connection.query("UPDATE destination SET ? WHERE iddestination = ?", [formData, idUrl], (err, results) => {
+    if (err) {
+      res.status(500).send("Error modify destination");
+    } else {
+      res.json(results);
     }
-  );
+  });
 });
 
 // Delete a destination
 router.delete("/:id", (req, res) => {
   const idUrl = req.params.id;
-  connection.query(
-    "DELETE FROM destination WHERE iddestination = ?",
-    [idUrl],
-    err => {
-      if (err) {
-        res.status(500).send("Error deleting");
-      } else {
-        res.sendStatus(200);
-      }
+  connection.query("DELETE FROM destination WHERE iddestination = ?", [idUrl], (err) => {
+    if (err) {
+      res.status(500).send("Error deleting");
+    } else {
+      res.sendStatus(200);
     }
-  );
+  });
 });
 
 module.exports = router;
