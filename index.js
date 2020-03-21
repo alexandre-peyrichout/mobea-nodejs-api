@@ -4,17 +4,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const api = require("./src/routes");
 
-const bodyParser = require("body-parser");
-
-const cors = require("cors")
-
-// Support JSON-encoded bodies
-app.use(bodyParser.json());
-// Support URL-encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cors());
-
 // pour plaire au corse
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,8 +15,25 @@ app.use((req, res, next) => {
   );
   res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type,**Authorization**");
 
-  next();
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
 });
+
+const bodyParser = require("body-parser");
+
+const cors = require("cors")
+
+// Support JSON-encoded bodies
+app.use(bodyParser.json());
+// Support URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cors());
+
 
 app.use("/api", api);
 
