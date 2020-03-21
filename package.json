@@ -4,7 +4,7 @@
   "description": "Node template",
   "main": "./index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon -x 'node index.js || (sleep 1; touch index.js)'",
     "start:dev": "nodemon",
     "start:debsug": "nodemon --config nodemon-debug.json",
     "lint": "eslint ./src",
