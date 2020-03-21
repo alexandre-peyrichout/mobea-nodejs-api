@@ -35,7 +35,7 @@ router.post("/new", (req, res) => {
   const formData = req.body;
   connection.query("INSERT INTO destination SET ?", formData, (err, result) => {
     if (err) {
-      res.status(500).send("Error create a new destination");
+      res.status(500).send(err);
     } else {
       res.sendStatus(200);
     }
