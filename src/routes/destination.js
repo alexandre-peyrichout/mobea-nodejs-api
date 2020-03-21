@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 router.get("/last", (req, res) => {
   const user = req.query.id;
   connection.query(
-    "SELECT destination from destination WHERE user_iduser = ? ORDER BY destination DESC LIMIT 1",
+    "SELECT iddestination from destination WHERE user_iduser = ? ORDER BY iddestination DESC LIMIT 1",
     user,
     (err, lastDest) => {
       if (err) {
