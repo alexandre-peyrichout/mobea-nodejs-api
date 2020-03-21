@@ -37,7 +37,7 @@ router.post("/new", (req, res) => {
     if (err) {
       res.status(500).send("Error create a new destination");
     } else {
-      res.sendStatus(200).json(result);
+      res.sendStatus(200);
     }
   });
 });
